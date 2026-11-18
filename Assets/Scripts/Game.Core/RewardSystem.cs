@@ -27,9 +27,6 @@ namespace Game.Core
             // --- 기록 ---
             lastR = r;
             return r;
-
-            // int oldR = c * 8;   // 예전 공식 (혹시 몰라 남겨 둠)
-            // if (isEvent) oldR = oldR * 2;
         }
     }
 }
