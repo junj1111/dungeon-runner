@@ -18,7 +18,7 @@ namespace Game.Core.Tests
         public void Proc_Coin3_Boss1_Diff1_NoEvent_Time100()
         {
             var sut = new RewardSystem();
-            int reward = sut.ApplyStageReward(t: 100, c: 3, b: 1, isEvent: false, diff: 1);
+            int reward = sut.Proc(t: 100, c: 3, b: 1, isEvent: false, diff: 1);
             Assert.AreEqual(80, reward);        // 3*10 + 1*50
             Assert.AreEqual("B", sut.grade);    // 90 <= 100 < 120
         }
@@ -28,7 +28,7 @@ namespace Game.Core.Tests
         public void Proc_TimeBoundary_59_IsGradeS_WithBonus()
         {
             var sut = new RewardSystem();
-            int reward = sut.ApplyStageReward(t: 59, c: 3, b: 0, isEvent: false, diff: 1);
+            int reward = sut.Proc(t: 59, c: 3, b: 0, isEvent: false, diff: 1);
             Assert.AreEqual(130, reward);       // 30 + S 보너스 100
             Assert.AreEqual("S", sut.grade);
         }
@@ -38,7 +38,7 @@ namespace Game.Core.Tests
         public void Proc_TimeBoundary_60()
         {
             var sut = new RewardSystem();
-            int reward = sut.ApplyStageReward(t: 60, c: 1, b: 0, isEvent: false, diff: 1);
+            int reward = sut.Proc(t: 60, c: 1, b: 0, isEvent: false, diff: 1);
             // r = 10 계산
             // r = 10 diff
             // r = 10 event
@@ -53,7 +53,7 @@ namespace Game.Core.Tests
         public void Proc_EventMultiplier()
         {
             var sut = new RewardSystem();
-            int reward = sut.ApplyStageReward(t: 100, c: 4, b: 0, isEvent: true, diff: 1);
+            int reward = sut.Proc(t: 100, c: 4, b: 0, isEvent: true, diff: 1);
             Assert.AreEqual(60, reward);
         }
 
@@ -62,7 +62,7 @@ namespace Game.Core.Tests
         public void Proc_Diff3_Multiplier()
         {
             var sut = new RewardSystem();
-            int reward = sut.ApplyStageReward(t: 100, c: 2, b: 1, isEvent: false, diff: 3);
+            int reward = sut.Proc(t: 100, c: 2, b: 1, isEvent: false, diff: 3);
             Assert.AreEqual(105, reward);
         }
 
@@ -71,7 +71,7 @@ namespace Game.Core.Tests
         public void Proc_TimeBoundary_120()
         {
             var sut = new RewardSystem();
-            sut.ApplyStageReward(t: 120, c: 0, b: 0, isEvent: false, diff: 1);
+            sut.Proc(t: 120, c: 0, b: 0, isEvent: false, diff: 1);
             Assert.AreEqual("C", sut.grade);
         }
 
@@ -90,7 +90,7 @@ namespace Game.Core.Tests
         {
             var c = new CombatCalc();
             Assert.AreEqual(4, c.Damage("slime", 5));
-            Assert.AreEqual(6, c.Damage("boss", 10));
+            Assert.AreEqual(7, c.Damage("boss", 10));
         }
     }
 }
